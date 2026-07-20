@@ -1,0 +1,54 @@
+body { 
+    font-family: 'Inter', sans-serif; 
+    background-color: #f6f5f2; /* 护眼莫兰迪柔灰色 */
+    color: #4a4540; 
+    -webkit-tap-highlight-color: transparent; /* 清除移动端点击高亮 */
+}
+.chengyu-title { 
+    font-family: 'Noto Serif SC', serif; 
+}
+
+/* 拼音标注样式：拼音完美居中对齐在汉字正上方 */
+ruby {
+    ruby-position: over;
+    ruby-align: center;
+}
+rt {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.45em; /* 调整较长名句的拼音大小 */
+    color: #8c8275;   /* 柔和灰色拼音 */
+    letter-spacing: 0.05em;
+    padding-bottom: 0.35em;
+    user-select: none;
+}
+
+/* 3D 卡片翻转核心动画样式 */
+#card-container { 
+    perspective: 1200px; 
+}
+.transform-style-3d { 
+    transform-style: preserve-3d; 
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+}
+.backface-hidden { 
+    backface-visibility: hidden; 
+    -webkit-backface-visibility: hidden;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+.rotate-y-180 { 
+    transform: rotateY(180deg); 
+}
+
+/* 负负得正：当整个卡片座旋转 180 度时，背面自动正过来，防止镜像倒转 */
+#flip-card > div:nth-child(2) {
+    transform: rotateY(180deg);
+}
+
+/* 选项被禁用时的样式 */
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+}

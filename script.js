@@ -51,7 +51,7 @@ function initApp() {
         let wrongList = JSON.parse(localStorage.getItem('minju_wrong_list')) || [];
         updateWeaknessButton(wrongList.length);
 
-        updateAvailableButtons(); // <-- 初始化时检查并隐藏无数据的字母按钮
+        updateAvailableButtons(); 
         filterCategoryData();
         setupFlipEvent();
         renderCard();
@@ -95,8 +95,11 @@ function renderCard() {
     if (exampleEl) {
         const textContent = currentItem.text || '';
         let exampleText = currentItem.example || '暂无例句。';
-        if (textContent && exampleText.includes(textContent)) {
-            exampleText = exampleText.replace(textContent, ` ______ `);
+        if (textContent) {
+            // 智能模糊匹配：移除格言自身的标点符号，动态匹配并挖空例句中的文本（即使夹杂引号、逗号也能识别）
+            const cleanText = textContent.replace(/[，。；：！？、]/g, '');
+            const regex = new RegExp(cleanText.split('').join('[，。；：！？、“”]*'), 'g');
+            exampleText = exampleText.replace(regex, ` ______ `);
         }
         exampleEl.innerText = exampleText;
     }
@@ -198,7 +201,6 @@ function filterCategory(categoryName) {
 
     const buttons = document.querySelectorAll('#filterNav button');
     buttons.forEach(btn => {
-        // 如果按钮已经被隐藏了，就跳过它，不做样式切换
         if (btn.classList.contains('hidden')) return; 
 
         if (btn.innerText.includes(categoryName)) {
@@ -262,20 +264,16 @@ function startQuiz() {
 
 // 检查数据并动态更新字母按钮状态（有数据的显示，没有的数据直接整颗隐藏）
 function updateAvailableButtons() {
-    // 提取出当前全库里存在的所有首字母
     const existingKeys = new Set(allMottos.map(item => item.pinyin_key));
-    // 获取筛选栏内所有附带 data-letter 属性的按钮
     const buttons = document.querySelectorAll('#filterNav button[data-letter]');
 
     buttons.forEach(btn => {
         const letter = btn.getAttribute('data-letter');
 
         if (existingKeys.has(letter)) {
-            // 有对应的数据：显示按钮，移除隐藏类名并恢复点击
             btn.classList.remove('hidden');
             btn.disabled = false;
         } else {
-            // 没有对应的数据：利用 Tailwind 的 hidden 直接隐藏按钮，并禁用点击
             btn.classList.add('hidden');
             btn.disabled = true;
         }
@@ -328,9 +326,12 @@ function renderQuizQuestion() {
         }).join('');
 
     } else if (currentQ.qType === 2) {
+        // 核心修复：测验“语境填空”下的智能挖空防泄题机制
         let exampleText = currentQ.example || '暂无例句。';
-        if (currentQ.text && exampleText.includes(currentQ.text)) {
-            exampleText = exampleText.replace(currentQ.text, ` ______ `);
+        if (currentQ.text) {
+            const cleanText = currentQ.text.replace(/[，。；：！？、]/g, '');
+            const regex = new RegExp(cleanText.split('').join('[，。；：！？、“”]*'), 'g');
+            exampleText = exampleText.replace(regex, ` ______ `);
         }
         
         questionWordEl.innerHTML = `<span class="text-[10px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-sans font-medium block w-max mx-auto mb-2">语境填空</span><p class="text-sm font-normal font-sans px-4 text-stone-700 leading-relaxed text-left">${exampleText}</p>`;

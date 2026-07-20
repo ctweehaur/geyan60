@@ -3,7 +3,16 @@ const allMottos = [
     ...(typeof data1 !== 'undefined' ? data1 : []),
     ...(typeof data2 !== 'undefined' ? data2 : []),
     ...(typeof data3 !== 'undefined' ? data3 : []),
-
+    ...(typeof data4 !== 'undefined' ? data4 : []),
+    ...(typeof data5 !== 'undefined' ? data5 : []),
+    ...(typeof data6 !== 'undefined' ? data6 : []),
+    ...(typeof data7 !== 'undefined' ? data7 : []),
+    ...(typeof data8 !== 'undefined' ? data8 : []),
+    ...(typeof data9 !== 'undefined' ? data9 : []),
+    ...(typeof data10 !== 'undefined' ? data10 : []),
+    ...(typeof data11 !== 'undefined' ? data11 : []),
+    ...(typeof data12 !== 'undefined' ? data12 : []),
+    ...(typeof data13 !== 'undefined' ? data13 : [])
 ];
 
 let currentPlan = [];       
@@ -42,6 +51,7 @@ function initApp() {
         let wrongList = JSON.parse(localStorage.getItem('minju_wrong_list')) || [];
         updateWeaknessButton(wrongList.length);
 
+        updateAvailableButtons(); // <-- 新增：初始化时更新字母按钮状态
         filterCategoryData();
         setupFlipEvent();
         renderCard();
@@ -188,6 +198,9 @@ function filterCategory(categoryName) {
 
     const buttons = document.querySelectorAll('#filterNav button');
     buttons.forEach(btn => {
+        // 跳过被禁用的按钮，防止样式覆盖干扰
+        if (btn.disabled) return; 
+
         if (btn.innerText.includes(categoryName)) {
             btn.classList.add('bg-stone-800', 'text-white', 'border-stone-800');
             btn.classList.remove('bg-white', 'text-stone-600', 'border-stone-200');
@@ -245,6 +258,30 @@ function startQuiz() {
 
     document.getElementById('quiz-modal').classList.remove('hidden');
     renderQuizQuestion();
+}
+
+// 检查数据并动态更新字母按钮状态（无数据则置灰且无法点击）
+function updateAvailableButtons() {
+    // 提取出当前全库里存在的所有首字母
+    const existingKeys = new Set(allMottos.map(item => item.pinyin_key));
+    // 获取筛选栏内所有附带 data-letter 属性的按钮
+    const buttons = document.querySelectorAll('#filterNav button[data-letter]');
+
+    buttons.forEach(btn => {
+        const letter = btn.getAttribute('data-letter');
+
+        if (existingKeys.has(letter)) {
+            // 有对应的数据，正常激活状态
+            btn.disabled = false;
+            btn.classList.remove('opacity-30', 'cursor-not-allowed', 'bg-stone-100', 'text-stone-400');
+            btn.classList.add('bg-white', 'text-stone-600', 'border-stone-200');
+        } else {
+            // 没有对应的数据，按钮置灰且彻底停用
+            btn.disabled = true;
+            btn.classList.remove('bg-white', 'text-stone-600', 'hover:border-stone-400', 'hover:bg-stone-50');
+            btn.classList.add('opacity-30', 'cursor-not-allowed', 'bg-stone-100', 'text-stone-400', 'border-stone-200');
+        }
+    });
 }
 
 function closeQuiz() {

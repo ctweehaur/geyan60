@@ -23,35 +23,35 @@
             <p id="mastery-status" class="text-[10px] text-stone-400 mt-1.5 font-mono tracking-wider">已掌握 0 / 0 词 (0%)</p>
         </header>
 
-        <!-- 首字母索引筛选导航栏 -->
+        <!-- 首字母索引筛选导航栏（已修正字母与事件对应关系，并加入了 data-letter 属性） -->
         <nav class="flex gap-1 flex-wrap justify-center mb-4" id="filterNav">
             <button class="px-3 py-1 bg-stone-800 text-white border border-stone-800 text-xs rounded-full transition-all" onclick="filterCategory('全部')">全部</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('B')">A</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('G')">B</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('J')">C</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('M')">D</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('Q')">E</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('R')">F</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('S')">G</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('T')">H</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('W')">I</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('X')">J</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('Y')">K</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('Z')">L</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('B')">N</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('G')">M</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('J')">O</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('M')">P</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('Q')">Q</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('R')">R</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('S')">S</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('T')">T</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('W')">U</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('X')">V</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('Y')">W</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('Z')">X</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('Y')">Y</button>
-            <button class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('Z')">Z</button>
+            <button data-letter="A" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('A')">A</button>
+            <button data-letter="B" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('B')">B</button>
+            <button data-letter="C" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('C')">C</button>
+            <button data-letter="D" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('D')">D</button>
+            <button data-letter="E" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('E')">E</button>
+            <button data-letter="F" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('F')">F</button>
+            <button data-letter="G" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('G')">G</button>
+            <button data-letter="H" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('H')">H</button>
+            <button data-letter="I" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('I')">I</button>
+            <button data-letter="J" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('J')">J</button>
+            <button data-letter="K" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('K')">K</button>
+            <button data-letter="L" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('L')">L</button>
+            <button data-letter="M" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('M')">M</button>
+            <button data-letter="N" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('N')">N</button>
+            <button data-letter="O" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('O')">O</button>
+            <button data-letter="P" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('P')">P</button>
+            <button data-letter="Q" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('Q')">Q</button>
+            <button data-letter="R" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('R')">R</button>
+            <button data-letter="S" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('S')">S</button>
+            <button data-letter="T" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('T')">T</button>
+            <button data-letter="U" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('U')">U</button>
+            <button data-letter="V" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('V')">V</button>
+            <button data-letter="W" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('W')">W</button>
+            <button data-letter="X" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('X')">X</button>
+            <button data-letter="Y" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('Y')">Y</button>
+            <button data-letter="Z" class="px-3 py-1 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 text-stone-600 text-xs rounded-full transition-all" onclick="filterCategory('Z')">Z</button>
         </nav>
 
         <div class="grid grid-cols-2 gap-3 mb-4">
@@ -151,7 +151,7 @@
         </div>
     </div>
 
-    <!-- 依次引入 13 个数据文件 -->
+    <!-- 依次引入数据文件 -->
     <script src="data1.js"></script>
     <script src="data2.js"></script>
     <script src="data3.js"></script>

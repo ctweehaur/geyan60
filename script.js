@@ -1,18 +1,9 @@
 // 自动合并所有独立引入的 motto 数据源
 const allMottos = [
-    ...(typeof mData1 !== 'undefined' ? mData1 : []),
-    ...(typeof mData2 !== 'undefined' ? mData2 : []),
-    ...(typeof mData3 !== 'undefined' ? mData3 : []),
-    ...(typeof mData4 !== 'undefined' ? mData4 : []),
-    ...(typeof mData5 !== 'undefined' ? mData5 : []),
-    ...(typeof mData6 !== 'undefined' ? mData6 : []),
-    ...(typeof mData7 !== 'undefined' ? mData7 : []),
-    ...(typeof mData8 !== 'undefined' ? mData8 : []),
-    ...(typeof mData9 !== 'undefined' ? mData9 : []),
-    ...(typeof mData10 !== 'undefined' ? mData10 : []),
-    ...(typeof mData11 !== 'undefined' ? mData11 : []),
-    ...(typeof mData12 !== 'undefined' ? mData12 : []),
-    ...(typeof mData13 !== 'undefined' ? mData13 : [])
+    ...(typeof data1 !== 'undefined' ? data1 : []),
+    ...(typeof data2 !== 'undefined' ? data2 : []),
+    ...(typeof data3 !== 'undefined' ? data3 : []),
+
 ];
 
 let currentPlan = [];       

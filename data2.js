@@ -199,4 +199,4 @@ const data2 = [
     "bm": "Pendidikan bagi melahirkan modal insan mengambil masa yang lama berbanding menanam pokok.",
     "example": "教育事业是国家发展的根本，因为十年树木，百年树人。"
   }
-]；
+];

@@ -51,7 +51,7 @@ function initApp() {
         let wrongList = JSON.parse(localStorage.getItem('minju_wrong_list')) || [];
         updateWeaknessButton(wrongList.length);
 
-        updateAvailableButtons(); // <-- 新增：初始化时更新字母按钮状态
+        updateAvailableButtons(); // <-- 初始化时检查并隐藏无数据的字母按钮
         filterCategoryData();
         setupFlipEvent();
         renderCard();
@@ -198,8 +198,8 @@ function filterCategory(categoryName) {
 
     const buttons = document.querySelectorAll('#filterNav button');
     buttons.forEach(btn => {
-        // 跳过被禁用的按钮，防止样式覆盖干扰
-        if (btn.disabled) return; 
+        // 如果按钮已经被隐藏了，就跳过它，不做样式切换
+        if (btn.classList.contains('hidden')) return; 
 
         if (btn.innerText.includes(categoryName)) {
             btn.classList.add('bg-stone-800', 'text-white', 'border-stone-800');
@@ -260,7 +260,7 @@ function startQuiz() {
     renderQuizQuestion();
 }
 
-// 检查数据并动态更新字母按钮状态（无数据则置灰且无法点击）
+// 检查数据并动态更新字母按钮状态（有数据的显示，没有的数据直接整颗隐藏）
 function updateAvailableButtons() {
     // 提取出当前全库里存在的所有首字母
     const existingKeys = new Set(allMottos.map(item => item.pinyin_key));
@@ -271,15 +271,13 @@ function updateAvailableButtons() {
         const letter = btn.getAttribute('data-letter');
 
         if (existingKeys.has(letter)) {
-            // 有对应的数据，正常激活状态
+            // 有对应的数据：显示按钮，移除隐藏类名并恢复点击
+            btn.classList.remove('hidden');
             btn.disabled = false;
-            btn.classList.remove('opacity-30', 'cursor-not-allowed', 'bg-stone-100', 'text-stone-400');
-            btn.classList.add('bg-white', 'text-stone-600', 'border-stone-200');
         } else {
-            // 没有对应的数据，按钮置灰且彻底停用
+            // 没有对应的数据：利用 Tailwind 的 hidden 直接隐藏按钮，并禁用点击
+            btn.classList.add('hidden');
             btn.disabled = true;
-            btn.classList.remove('bg-white', 'text-stone-600', 'hover:border-stone-400', 'hover:bg-stone-50');
-            btn.classList.add('opacity-30', 'cursor-not-allowed', 'bg-stone-100', 'text-stone-400', 'border-stone-200');
         }
     });
 }
